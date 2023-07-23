@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  ztreaments:
+    image: ztreaments
+    ports:
+      - "3030:3000"
+    env_file: .env
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/app
+      - '/app/node_modules'
+    #command: sh -c "npm run dev"
