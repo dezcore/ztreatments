@@ -5,6 +5,8 @@ services:
     image: ztreaments
     ports:
       - "3030:3000"
+    networks:
+      - mongonetwork
     env_file: .env
     working_dir: /app
     build:
@@ -13,4 +15,11 @@ services:
     volumes:
       - .:/app
       - '/app/node_modules'
+    environment:
+      CONN_STR: mongodb://root:secret@mongodb
+
     #command: sh -c "npm run dev"
+networks:
+  mongonetwork:
+    name: maboke_network  
+    external: true 

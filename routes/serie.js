@@ -1,11 +1,13 @@
 const express = require('express')
 const router = express.Router()
+const dbService = require('../services/db')
 const imgService = require('../services/img')
 const serieService = require('../services/serie')
 
 /*GET test responses */
 router.get('/', (req, res) => {
-  imgService.imgRedimension()
+  //imgService.imgRedimension()
+  dbService.testDb()
   serieService.getSeries(req, res)
 })
 
