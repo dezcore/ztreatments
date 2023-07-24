@@ -1,4 +1,5 @@
 const fs = require('fs');
+const Axios = require('axios');
 const sharp = require('sharp');
 const PNG = require('pngjs').PNG;
 const pixelmatch = require('pixelmatch');
@@ -72,6 +73,25 @@ function imgRedimension() {
   }
 }
 
+async function downloadImg() {
+  //const url = "https://static.butfootballclub.fr/16/2023/07/photo_article/826539/330325/1200-L-fc-barcelone-psg-messi-ouvre-dj-son-compteur-avec-l-inter-miami-et-de-quelle-manire.jpg"
+  const url = "https://i.ytimg.com/vi/a6PmOjw0RQU/hqdefault.jpg?sqp=-oaymwEcCNACELwBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAteBC5h0jP6qcGbVrX74wVsoxGSw"
+  const filepath = 'data/dest/img2.jpg'
+  const response = await Axios({
+    url,
+    method: 'GET',
+    responseType: 'stream'
+} );
+  return new Promise((resolve, reject) => {
+    response.data.pipe(fs.createWriteStream(filepath))
+        .on('error', reject)
+        .once('close', () => resolve(filepath)); 
+  });
+}
+
 module.exports = {
-  imgRedimension
+  imgRedimension,
+  readImage,
+  writeImage,
+  downloadImg
 }

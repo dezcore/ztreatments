@@ -7,7 +7,8 @@ const serieService = require('../services/serie')
 /*GET test responses */
 router.get('/', (req, res) => {
   //imgService.imgRedimension()
-  dbService.testDb()
+  //dbService.testDb()
+  imgService.downloadImg()
   serieService.getSeries(req, res)
 })
 
